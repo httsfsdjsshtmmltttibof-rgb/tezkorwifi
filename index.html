@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tezkor WIFI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #f27a24; /* Olov rang */
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Asosiy konteyner */
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--card-bg);
+            min-height: 100vh;
+            padding: 40px 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        /* Saqlash tugmasi (Chap tepa) */
+        .btn-save {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-save:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        /* Profil qismi */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 10px;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            padding: 3px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(242, 122, 36, 0.2);
+        }
+
+        .profile-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .profile-bio {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Aloqa tugmalari */
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--text-muted);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background-color: rgba(242, 122, 36, 0.05);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            box-shadow: 0 4px 15px rgba(242, 122, 36, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #d9691b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(242, 122, 36, 0.4);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Tariflar qismi */
+        .section-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .tariffs-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tariff-card {
+            border: 1px solid #eaeaea;
+            border-radius: 16px;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .tariff-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 25px rgba(242, 122, 36, 0.15);
+        }
+
+        .t-header {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .t-badge {
+            background: #00bcd4;
+            color: #fff;
+            font-size: 10px;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+
+        .t-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .t-feature i {
+            color: var(--text-main);
+            width: 16px;
+            text-align: center;
+        }
+
+        .t-price-box {
+            margin: 20px 0 15px 0;
+            text-align: right;
+            border-top: 1px dashed #ddd;
+            padding-top: 15px;
+        }
+
+        .t-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .t-currency {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: normal;
+        }
+
+        /* Ulashish (Share) tugmasi - O'ng pastki burchak */
+        .btn-share {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(242, 122, 36, 0.4);
+            cursor: pointer;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+            border: none;
+            text-decoration: none;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(242, 122, 36, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(242, 122, 36, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(242, 122, 36, 0);
+            }
+        }
+
+        /* Qorong'i rejim uchun media query (ixtiyoriy, agar tizim qorong'i bo'lsa o'qish qulay bo'lishi uchun) */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --card-bg: #1e1e1e;
+                --text-main: #ffffff;
+                --text-muted: #aaaaaa;
+            }
+            .tariff-card {
+                border-color: #333;
+                background: #252525;
+            }
+            .t-feature i {
+                color: #ddd;
+            }
+            .t-price-box {
+                border-top-color: #444;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="site-content">
+        <button class="btn-save" onclick="savePage()" title="Saytni saqlash">
+            <i class="fa-solid fa-bookmark"></i>
+        </button>
+
+        <div class="profile-section">
+            <img src="https://i.postimg.cc/KzShNHhG/Rabocij-stol-29-07-(10).jpg" alt="Tezkor WIFI" class="profile-img">
+            <h1 class="profile-title">Tezkor WI-FI</h1>
+            <p class="profile-bio">Bizning tariflarimiz</p>
+        </div>
+
+        <div class="contact-buttons">
+            <a href="tel:+998888883026" class="btn btn-outline">
+                <i class="fa-solid fa-phone"></i> Telefon raqam
+            </a>
+            <a href="https://t.me/shoabdurashidov" target="_blank" class="btn btn-outline">
+                <i class="fa-brands fa-telegram"></i> Telegram
+            </a>
+         </a>
+            <a href="https://t.me/WiFiB0R" target="_blank" class="btn btn-outline">
+                <i class="fa-brands fa-telegram"></i> Telegram
+            </a>
+
+        </div>
+
+        <h2 class="section-title">Bizning tariflarimiz</h2>
+
+        <div class="tariffs-grid">
+
+            <div class="tariff-card">
+                <div class="t-header">
+                    Spark+hophop <span class="t-badge">FTTx</span>
+                </div>
+                <div class="t-feature"><i class="fa-solid fa-gauge-high"></i> Скорость с 00:00 до 17:00<br>100 мбит/с</div>
+                <div class="t-feature"><i class="fa-solid fa-moon"></i> Скорость с 17:00 до 00:00<br>70 мбит/с</div>
+                <div class="t-feature"><i class="fa-solid fa-chart-pie"></i> БЕЗЛИМИТ</div>
+                <div class="t-feature"><i class="fa-solid fa-check-square"></i> TAS-IX 100 Мбит/с на FTTx</div>
+                <div class="t-feature"><i class="fa-solid fa-check-square"></i> Sarkor TV 145+ каналов</div>
+                <div class="t-feature"><i class="fa-solid fa-check-square"></i> HopHopTV 120 каналов</div>
+                
+                <div class="t-price-box">
+                    <span class="t-price">170 000 <span class="t-currency">сум<br>месяц</span></span>
+                </div>
+                <a href="https://t.me/shoabdurashidov" target="_blank" class="btn btn-primary">
+                    Подключить
+                </a>
+            </div>
+
+            <div class="tariff-card">
+                <div class="t-header">
+                    Boost+hophop <span class="t-badge">FTTx</span>
+                </div>
+                <div class="t-feature"><i class="fa-solid fa-gauge-high"></i> Скорость с 00:00 до 17:00<br>100 мбит/с</div>
+                <div class="t-feature"><i class="fa-solid fa-moon"></i> Скорость с 17:00 до 00:00<br>100 мбит/с</div>
+                <div class="t-feature"><i class="fa-solid fa-chart-pie"></i> БЕЗЛИМИТ</div>
+                <div class="t-feature"><i class="fa-solid fa-check-square"></i> TAS-IX 100 Мбит/с на FTTx</div>
+                <div class="t-feature"><i class="fa-solid fa-check-square"></i> Sarkor TV 145+ каналов</div>
+                <div class="t-feature"><i class="fa-solid fa-check-square"></i> HopHopTV 120 каналов</div>
+                
+                <div class="t-price-box">
+                    <span class="t-price">190 000 <span class="t-currency">сум<br>месяц</span></span>
+                </div>
+                <a href="https://t.me/shoabdurashidov" target="_blank" class="btn btn-primary">
+                    Подключить
+                </a>
+            </div>
+
+            <div class="tariff-card">
+                <div class="t-header">
+                    Flame+hophop <span class="t-badge">FTTx</span>
+                </div>
+                <div class="t-feature"><i class="fa-solid fa-gauge-high"></i> Скорость с 00:00 до 17:00<br>300 мбит/с</div>
+                <div class="t-feature"><i class="fa-solid fa-moon"></i> Скорость с 17:00 до 00:00<br>300 мбит/с</div>
+                <div class="t-feature"><i class="fa-solid fa-chart-pie"></i> БЕЗЛИМИТ</div>
+                <div class="t-feature"><i class="fa-solid fa-check-square"></i> TAS-IX 300 Мбит/с на FTTx</div>
+                <div class="t-feature"><i class="fa-solid fa-check-square"></i> Sarkor TV 145+ каналов</div>
+                <div class="t-feature"><i class="fa-solid fa-check-square"></i> HopHopTV 120 каналов</div>
+                
+                <div class="t-price-box">
+                    <span class="t-price">244 000 <span class="t-currency">сум<br>месяц</span></span>
+                </div>
+                <a href="https://t.me/shoabdurashidov" target="_blank" class="btn btn-primary">
+                    Подключить
+                </a>
+            </div>
+
+            <div class="tariff-card">
+                <div class="t-header">
+                    Space+hophop <span class="t-badge">FTTx</span>
+                </div>
+                <div class="t-feature"><i class="fa-solid fa-gauge-high"></i> Скорость с 00:00 до 17:00<br>600 мбит/с</div>
+                <div class="t-feature"><i class="fa-solid fa-moon"></i> Скорость с 17:00 до 00:00<br>600 мбит/с</div>
+                <div class="t-feature"><i class="fa-solid fa-chart-pie"></i> БЕЗЛИМИТ</div>
+                <div class="t-feature"><i class="fa-solid fa-check-square"></i> TAS-IX 600 Мбит/с на FTTx</div>
+                <div class="t-feature"><i class="fa-solid fa-check-square"></i> Sarkor TV 145+ каналов</div>
+                <div class="t-feature"><i class="fa-solid fa-check-square"></i> HopHopTV 120 каналов</div>
+                
+                <div class="t-price-box">
+                    <span class="t-price">444 000 <span class="t-currency">сум<br>месяц</span></span>
+                </div>
+                <a href="https://t.me/shoabdurashidov" target="_blank" class="btn btn-primary">
+                    Подключить
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <a href="#" class="btn-share" onclick="shareToTelegram(event)" title="Telegramda ulashish">
+        <i class="fa-solid fa-paper-plane"></i>
+    </a>
+
+    <script>
+        // 1. Saytni saqlash funksiyasi (Telefon va kompyuterda PDF qilib saqlash oynasini ochadi)
+        function savePage() {
+            window.print();
+        }
+
+        // 2. Telegram orqali ulashish funksiyasi
+        function shareToTelegram(e) {
+            e.preventDefault();
+            
+            // Github ga yuklaganingizdan so'ng, saytingiz silkasi avtomatik olinadi
+            const currentUrl = encodeURIComponent(window.location.href);
+            
+            // Xabar matni
+            const shareText = encodeURIComponent("Tezkor WIFI\nBizning tariflarimiz va aloqamiz\nKirib ko'ring: ");
+            
+            // Telegram ulashish havolasi
+            const telegramUrl = `https://t.me/share/url?url=${currentUrl}&text=${shareText}`;
+            
+            // Yangi oynada ochish
+            window.open(telegramUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
